@@ -1,0 +1,34 @@
+plugins {
+	id 'java-library'
+	id 'maven-publish'
+	id "com.adarshr.test-logger" version "1.6.0"
+}
+
+group = 'org.example.projectA'
+version = '0.0.1-SNAPSHOT'
+
+repositories {
+	mavenLocal()
+	jcenter()
+}
+
+dependencies {
+	testImplementation 'junit:junit:4.12'
+}
+
+task packageTests(type: Jar, dependsOn: testClasses) {
+	from sourceSets.test.output
+	classifier = 'tests'
+}
+
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+			from components.java
+			artifact packageTests
+			groupId project.group
+			artifactId project.name
+			version project.version
+		}
+	}
+}
