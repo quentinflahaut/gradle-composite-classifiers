@@ -22,7 +22,7 @@ task packageTests(type: Jar, dependsOn: testClasses) {
 }
 
 artifacts {
-	compile(packageTests)
+    api(packageTests)
 }
 
 publishing {
