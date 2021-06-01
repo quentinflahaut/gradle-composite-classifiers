@@ -21,6 +21,10 @@ task packageTests(type: Jar, dependsOn: testClasses) {
 	classifier = 'tests'
 }
 
+artifacts {
+	compile(packageTests)
+}
+
 publishing {
 	publications {
 		mavenJava(MavenPublication) {
